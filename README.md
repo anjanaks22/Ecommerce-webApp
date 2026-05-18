@@ -1,4 +1,4 @@
-# KitZone - Jersey E-Commerce Website
+# ShopyZone - Jersey E-Commerce Website
 
 A dynamic, full-stack e-commerce web application designed for sports enthusiasts to browse and purchase their favorite team jerseys.
 
