@@ -1,0 +1,154 @@
+<!-- HTML with embedded CSS -->
+<style>
+  /* Navbar styling */
+  .custom-navbar {
+    background: linear-gradient(to right, #4a6fa5, #2e4c77);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px 20px;
+  }
+
+  .navbar-brand {
+    font-family: serif;
+    color: white !important;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-brand:hover {
+    transform: translateY(-2px);
+  }
+
+  .navbar-toggler {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 10px;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+  }
+
+  .nav-item.active .nav-link {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white !important;
+  }
+
+  /* Cart badge styling */
+  #cart-count {
+    background-color: #28a745;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* User dropdown styling */
+  .user-dropdown {
+    margin-left: 10px;
+  }
+
+  .user-dropdown-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+
+  .user-dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding: 8px 0;
+  }
+
+  .dropdown-item {
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #2e4c77;
+  }
+
+  .navbar-logo {
+    height: 150px;
+    /* Adjust size as needed */
+    max-width: 150px;
+    object-fit: contain;
+  }
+</style>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <a class="navbar-brand" href="/">
+      <img src="/images/banner.png" alt="Shopping Cart" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="#">SHOPYZON</a>
+
+
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Products <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cart">Cart<span class="badge badge-success"
+              id="cart-count">{{cartCount}}</span></a>
+        </li>
+        {{#if user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/orders">Orders</a>
+        </li>
+        {{/if}}
+      </ul>
+      <div class="dropdown user-dropdown">
+        <button class="btn dropdown-toggle user-dropdown-btn" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{#if user}}
+          {{user.Name}}
+          {{else}}
+          Account
+          {{/if}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          {{#if user}}
+          <a class="dropdown-item" href="/logout">Logout</a>
+          {{else}}
+          <a class="dropdown-item" href="/login">Login</a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

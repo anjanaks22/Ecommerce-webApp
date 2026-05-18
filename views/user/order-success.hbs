@@ -1,0 +1,127 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<section class="order-success-section">
+  <div class="success-container">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+    </div>
+    <h1>Order Placed Successfully</h1>
+    <p class="success-message">Thank you for your purchase! Your order has been successfully placed and is being
+      processed.</p>
+    <a href="/orders" class="btn btn-primary">View Orders</a>
+  </div>
+</section>
+<style>
+  /* Order success page styling */
+  .order-success-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 60px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .success-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 50px 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #ebf7ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+  }
+
+  .success-icon svg {
+    color: #3498db;
+    font-size: 40px;
+  }
+
+  h1 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #3498db;
+  }
+
+  .success-message {
+    color: #5f6368;
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    background-color: #3498db;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Optional confetti animation */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .success-container {
+      padding: 30px 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    .success-message {
+      font-size: 16px;
+    }
+  }
+</style>

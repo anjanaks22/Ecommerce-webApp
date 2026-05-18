@@ -1,0 +1,264 @@
+<style>
+  /* Main container styling */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Form styling */
+  #checkout-form {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 40px;
+  }
+
+  /* Heading styles */
+  h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #3498db;
+  }
+
+  /* Form controls */
+  .form-control {
+    border: 1px solid #dfe4ea;
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+    outline: none;
+  }
+
+  /* Labels */
+  label {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Error messages */
+  .text-danger {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  /* Checkout summary box */
+  .checkout {
+    background-color: #ffffff;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 25px !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+  }
+
+  .checkout h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* Payment section */
+  .payment {
+    padding: 15px 0;
+  }
+
+  .payment p {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 15px;
+  }
+
+  /* Radio buttons */
+  input[type=radio] {
+    width: 18px;
+    height: 18px;
+    accent-color: #3498db;
+    margin-right: 10px;
+  }
+
+  label.radio-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+  }
+
+  label.radio-inline:hover {
+    background-color: #f1f9ff;
+  }
+
+  /* Checkout button */
+  .btn-primary {
+    background-color: #3498db;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Horizontal divider */
+  hr {
+    border-top: 1px solid #eaeaea;
+    margin: 20px 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .checkout {
+      margin-top: 30px !important;
+    }
+
+    .btn-primary {
+      width: 100%;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<section>
+  <div class="container mt-5">
+    <form action="" id="checkout-form">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Enter Delivery Details</h2><br>
+          <div>
+            <label for="">Address</label>
+            <input class="form-control" type="text" id="address" name="address">
+            <small class="text-danger" id="addressError"></small>
+
+            <label for="">PinCode</label>
+            <input class="form-control" type="text" id="pincode" name="pincode">
+            <small class="text-danger" id="pincodeError"></small>
+
+            <label for="">Mobile</label>
+            <input class="form-control" type="text" id="mobile" name="mobile">
+            <small class="text-danger" id="mobileError"></small>
+
+            <input type="text" name="userId" id="" value="{{user.id}}" hidden>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="container mt-5 ml-5 checkout">
+            <h5>Total Amount : Rs:{{total}}</h5>
+            <hr>
+            <div class="payment">
+              <p>Payment method</p>
+              <label class="radio-inline">
+                <input type="radio" name="payment-method" value="COD" checked>COD
+              </label>
+              <label class="radio-inline mt-2">
+                <input type="radio" name="payment-method" value="ONLINE">Online payment
+              </label>
+              <small class="text-danger" id="paymentError"></small>
+              <button class="btn btn-primary float-right" type="submit">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  $("#checkout-form").submit((e) => {
+    e.preventDefault();
+
+    let isValid = true;
+    let address = $("#address").val().trim();
+    let pincode = $("#pincode").val().trim();
+    let mobile = $("#mobile").val().trim();
+    let paymentMethod = $("input[name='payment-method']:checked").val();
+
+    // Reset errors
+    $(".text-danger").text("");
+
+    if (address === "") {
+      $("#addressError").text("Address is required.");
+      isValid = false;
+    }
+    if (pincode === "" || isNaN(pincode) || pincode.length !== 6) {
+      $("#pincodeError").text("Enter a valid 6-digit Pincode.");
+      isValid = false;
+    }
+    if (mobile === "" || isNaN(mobile) || mobile.length !== 10) {
+      $("#mobileError").text("Enter a valid 10-digit Mobile Number.");
+      isValid = false;
+    }
+    if (!paymentMethod) {
+      $("#paymentError").text("Select a payment method.");
+      isValid = false;
+    }
+
+    if (isValid) {
+      $.ajax({
+        url: '/place-order',
+        method: 'post',
+        data: $('#checkout-form').serialize(),
+        success: (response) => {
+          if (response.status) {
+            location.href = '/order-success';
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  input[type=radio] {
+    width: 20px;
+    height: 20px;
+  }
+
+  label.radio-inline {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkout {
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 30px;
+  }
+
+  .payment {
+    padding-bottom: 16px;
+  }
+</style>

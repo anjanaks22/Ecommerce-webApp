@@ -1,0 +1,276 @@
+<!-- HTML with embedded CSS -->
+<style>
+  .cart-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin: 40px auto;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cart-table th {
+    background-color: #f8f9fa;
+    color: #2e4c77;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #eaeaea;
+  }
+
+  .cart-table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+  }
+
+  .product-title {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .product-price {
+    font-weight: 600;
+    color: #e63946;
+  }
+
+  .quantity-control {
+    display: flex;
+    align-items: center;
+  }
+
+  .quantity-btn {
+    background-color: #f0f2f5;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0 8px;
+  }
+
+  .quantity-btn:hover {
+    background-color: #dfe4ea;
+  }
+
+  .quantity-number {
+    font-weight: 600;
+    width: 30px;
+    text-align: center;
+  }
+
+  .remove-btn {
+    background-color: #f8d7da;
+    border: none;
+    color: #e63946;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .remove-btn:hover {
+    background-color: #f5c6cb;
+  }
+
+  .cart-summary {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .cart-total {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2e4c77;
+  }
+
+  .total-value {
+    color: #e63946;
+  }
+
+  .checkout-btn {
+    background: linear-gradient(to right, #28a745, #218838);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s;
+    width: 200px;
+  }
+
+  .checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+  }
+
+  /* Empty cart styling */
+  .empty-cart-container {
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .empty-cart-icon {
+    font-size: 5rem;
+    color: #d3d3d3;
+    margin-bottom: 20px;
+  }
+
+  .empty-cart-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2e4c77;
+    margin-bottom: 15px;
+  }
+
+  .empty-cart-message {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto 30px;
+  }
+
+  .shop-now-btn {
+    background: linear-gradient(to right, #4a6fa5, #2e4c77);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .shop-now-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+  }
+</style>
+
+<section>
+  <div class="container">
+    {{#if cartEmpty}}
+    <div class="empty-cart-container">
+      <div class="empty-cart-icon">
+        <i class="fa fa-shopping-cart"></i>
+      </div>
+      <h3 class="empty-cart-title">Your Cart is Empty</h3>
+      <p class="empty-cart-message">
+        Looks like you haven't added anything to your cart yet.
+        Discover our amazing products and find something you'll love!
+      </p>
+      <a href="/" class="btn shop-now-btn">Start Shopping</a>
+    </div>
+    {{else}}
+    <div class="cart-container">
+      <h3 class="mb-4">Shopping Cart</h3>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+          <tr>
+            <td><img class="product-image" src="/product-images/{{this.product.id}}.jpg" alt="{{this.product.name}}">
+            </td>
+            <td class="product-title">{{this.product.name}}</td>
+            <td class="product-price">₹{{this.product.price}}</td>
+            <td>
+              <div class="quantity-control">
+                <button class="quantity-btn"
+                  onclick="changeQuantity('{{this.id}}', '{{this.product.id}}', '{{../user}}', -1)">-</button>
+                <span class="quantity-number" id="{{this.product.id}}">{{this.quantity}}</span>
+                <button class="quantity-btn"
+                  onclick="changeQuantity('{{this.id}}', '{{this.product.id}}', '{{../user}}', 1)">+</button>
+              </div>
+            </td>
+            <td>
+              <button class="remove-btn" onclick="removeFromCart('{{this.id}}', '{{this.product.id}}')">
+                <i class="fa fa-trash mr-1"></i> Remove
+              </button>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class="cart-summary">
+        <div class="cart-total">
+          Total: <span class="total-value">₹<span id="total">{{totalValue}}</span></span>
+        </div>
+        <a href="/place-order" class="btn checkout-btn">
+          <i class="fa fa-check-circle mr-2"></i>Place Order
+        </a>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</section>
+
+<script>
+  function changeQuantity(cartId, proId, userId, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.removeProduct) {
+          alert("Product removed from cart")
+          location.reload()
+        } else {
+          document.getElementById(proId).innerHTML = quantity + count
+          document.getElementById('total').innerHTML = response.total
+        }
+      }
+    })
+  }
+
+  function removeFromCart(cartId, productId) {
+    $.ajax({
+      url: '/remove-cart-item',
+      method: 'POST',
+      data: { cartId: cartId, productId: productId },
+      success: (response) => {
+        if (response.success) {
+          alert("Item removed from cart");
+          location.reload();
+        } else {
+          alert("Failed to remove item");
+        }
+      }
+    });
+  }
+</script>

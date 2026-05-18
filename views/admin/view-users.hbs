@@ -1,0 +1,118 @@
+<section>
+
+
+<h1 class="text-center my-4">All Users</h1>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <!--<th>Password</th>-->
+           <!-- <th>Actions</th>-->
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Email}}</td>
+          <!--  <td>{{this.Password}}</td>-->
+            <!--<td>
+                <a href="/admin/block-user/{{this._id}}" class="btn btn-danger btn-sm">Block</a>
+                <a href="/admin/delete-user/{{this._id}}" class="btn btn-warning btn-sm">Delete</a>
+            </td>-->
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</section>
+<style>
+
+    /* Users Table Section Styling */
+section {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 80vh;
+}
+
+h1 {
+  color: #0056b3;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+h1:after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Table styling */
+.table {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-bordered {
+  border: none;
+}
+
+.table-bordered td, 
+.table-bordered th {
+  border: 1px solid #e9ecef;
+}
+
+/* Header styling */
+.thead-dark {
+  background-color: #0069d9;
+  color: white;
+}
+
+.thead-dark th {
+  border-color: #0056b3;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  padding: 1rem 0.75rem;
+}
+
+/* Table body styling */
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+tbody tr:hover {
+  background-color: #e6f2ff;
+}
+
+tbody td {
+  padding: 0.85rem 0.75rem;
+  vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  thead th {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+</style>

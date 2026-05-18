@@ -1,0 +1,129 @@
+
+<section>
+
+
+<h1>All Orders</h1>
+<table border="1">
+    <thead>
+        <tr>
+           <!-- <th>Order ID</th>-->
+            <th>User Name</th>
+            <th>User ID</th>
+            <th>Total Amount</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each orders}}
+        <tr>
+           <!-- <td>{{this._id}}</td>-->
+            <td>{{this.userName}}</td>
+            <td>{{this.userId}}</td>
+            <td>₹{{this.totalAmount}}</td>
+            <td>{{this.paymentMethod}}</td>
+            <td>{{this.status}}</td>
+            <td>{{this.date}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</section>
+<style>
+    /* Orders Table Section Styling */
+section {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 80vh;
+}
+
+h1 {
+  color: #0056b3;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+h1:after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #007bff;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: none;
+}
+
+/* Header styling */
+thead {
+  background-color: #0069d9;
+  color: white;
+}
+
+thead th {
+  border: 1px solid #0056b3;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  padding: 1rem 0.75rem;
+  text-align: left;
+}
+
+/* Table body styling */
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+tbody tr:hover {
+  background-color: #e6f2ff;
+}
+
+tbody td {
+  padding: 0.85rem 0.75rem;
+  vertical-align: middle;
+  border: 1px solid #e9ecef;
+}
+
+/* Status column styling */
+tbody td:nth-child(6) {
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  thead th, tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  section {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+</style>

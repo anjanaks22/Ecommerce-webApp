@@ -1,0 +1,286 @@
+<section>
+  <div class="container">
+    <h1 class="page-title">Your Order History</h1>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th>Address</th>
+            <th>Pincode</th>
+            <th>Mobile</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Payment</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each orders}}
+          <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.pincode}}</td>
+            <td>{{this.mobile}}</td>
+            <td>{{this.total_amount}}</td>
+            <td>{{this.payment_method}}</td>
+            <td>{{this.status}}</td>
+            <td>
+              <a href="/view-order-products/{{this.id}}" class="btn btn-primary">View products</a>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<style>
+  /* Enhanced Orders Table Styling */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 20px;
+  }
+
+  /* Page title - add this before the table if possible */
+  .page-title {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+  }
+
+  /* Table container with card effect */
+  .table-wrapper {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .table-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 0 !important;
+  }
+
+  /* Stylish table header */
+  .table thead {
+    background: linear-gradient(135deg, #f1f9ff 0%, #dcf2ff 100%);
+  }
+
+  .table th {
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 2px solid #eaeaea;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+    position: relative;
+  }
+
+  .table th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.5), rgba(52, 152, 219, 0.1));
+  }
+
+  /* Table body styling */
+  .table td {
+    padding: 20px;
+    color: #34495e;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  /* Row hover effect */
+  .table tbody tr {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .table tbody tr:hover {
+    transform: translateY(-3px);
+    background-color: #f9fcff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+  }
+
+  .table tbody tr:hover td {
+    color: #2980b9;
+  }
+
+  .table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Status column styling */
+  td:nth-child(7) {
+    font-weight: 600;
+    position: relative;
+  }
+
+  /* Style different statuses */
+  td:nth-child(7):contains('Delivered') {
+    color: #2ecc71;
+  }
+
+  td:nth-child(7):contains('Shipped') {
+    color: #3498db;
+  }
+
+  td:nth-child(7):contains('Processing') {
+    color: #f39c12;
+  }
+
+  td:nth-child(7):contains('Cancelled') {
+    color: #e74c3c;
+  }
+
+  /* Payment method styling */
+  td:nth-child(6) {
+    font-weight: 500;
+  }
+
+  td:nth-child(6):contains('COD') {
+    color: #7f8c8d;
+  }
+
+  td:nth-child(6):contains('ONLINE') {
+    color: #27ae60;
+  }
+
+  /* Amount column styling */
+  td:nth-child(5) {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  td:nth-child(5)::before {
+    content: '₹ ';
+    opacity: 0.7;
+  }
+
+  /* Button styling */
+  .btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #2573a7 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+  }
+
+  /* Date column styling */
+  td:first-child {
+    font-weight: 500;
+    color: #7f8c8d;
+  }
+
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .table-wrapper {
+      padding: 15px;
+    }
+
+    .table th,
+    .table td {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .table tbody tr:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding: 40px 0;
+    }
+
+    .page-title {
+      font-size: 24px;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px 10px;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }
+
+  /* Animation for when the table loads */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .table-wrapper {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+</style>

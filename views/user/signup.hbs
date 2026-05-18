@@ -1,0 +1,130 @@
+<!-- HTML with embedded CSS -->
+<style>
+  .signup-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: 1px solid #f0f0f0;
+  }
+
+  .signup-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2e4c77;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+  }
+
+  .signup-title:after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #4361ee;
+    border-radius: 3px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+    outline: none;
+  }
+
+  .signup-btn {
+    background: linear-gradient(to right, #4361ee, #3a56d4);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s;
+    float: right;
+  }
+
+  .signup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+  }
+
+  .login-link {
+    color: #4a6fa5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .login-link:hover {
+    color: #2e4c77;
+    text-decoration: underline;
+  }
+
+  .input-hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-6 m-auto">
+    <div class="signup-container">
+      <h2 class="signup-title">Create Account</h2>
+      <form action="/signup" method="post">
+        <div class="form-group">
+          <label for="inputName">Full Name</label>
+          <input type="text" class="form-control" name="Name" id="inputName" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" class="form-control" name="Email" id="inputEmail" placeholder="Enter your email">
+          <small class="input-hint">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" name="Password" id="inputPassword"
+            placeholder="Create a password">
+          <small class="input-hint">Use at least 8 characters with a mix of letters and numbers.</small>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <a href="/login" class="login-link">Already have an account?</a>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn signup-btn">Create Account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
